@@ -1,0 +1,49 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <title>主页</title>
+</head>
+<script src="./static/js/jquery-3.4.1.min.js"></script>
+
+<body>
+    <script type="text/javascript">
+
+
+        function showtxt(txtname) {
+            var getData;
+            $.ajax({
+                url: "static/" + txtname,
+                dataType: "text",
+                async: false,
+                error: function () {
+                    alert("故障了喵orz");
+                },
+                success: function (data) {
+                    console.log("showtxt work" + data);
+                    getData = data;
+                }
+
+            });
+            // console.log(getData);
+            return getData;
+        }
+        function a() {
+            element = document.getElementById('myimage');
+            file_name = showtxt("flag.txt")
+            element.src = "./static/image/" + file_name + ".png";
+
+            //location.reload()
+            console.log("1");
+        }
+        setInterval("a()", 100);
+
+    </script>
+    <img id=myimage src="{% static '/image/over.png' %}" width="700" height="360">
+</body>
+
+</html>
